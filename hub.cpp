@@ -222,7 +222,7 @@ WSADATA wsaData;	// Used to open Windows connection
 
 unsigned char* HubTxCallback(unsigned char data, unsigned char* joy1, unsigned char* joy2, unsigned char* out)
 {
-	static unsigned char rcvLen, comLen, comBuffer[256], hubLen, *hubBuffer;
+	static unsigned char rcvLen, comLen, comBuffer[256], hubLen, *hubBuffer, outLen, outBuffer[256];
 	static unsigned char hasHeader, hasID, hasLen, comID = 0, hubID = 0;
 	unsigned char checksum, i;
 
@@ -238,8 +238,8 @@ unsigned char* HubTxCallback(unsigned char data, unsigned char* joy1, unsigned c
 	if (!hasHeader) {
 		switch (data) {
 		case 85:
-			*out = hubLen;
-			return hubBuffer;
+			*out = outLen;
+			return outBuffer;
 		case 170:
 			hasHeader = 1;
 			return 0;
@@ -264,7 +264,7 @@ unsigned char* HubTxCallback(unsigned char data, unsigned char* joy1, unsigned c
 	}
 
 	// Add data to buffer
-	comBuffer[comLen++] = data;
+	comBuffer[rcvLen++] = data;
 
 	// Check if packet was fully received (including extra byte for checksum)
 	if (rcvLen < comLen+1) { return 0; }
@@ -640,19 +640,19 @@ unsigned char* HubTxCallback(unsigned char data, unsigned char* joy1, unsigned c
 		checksum += hubBuffer[i];
 
 	// Prepare rx data
-	hubLen = 0;
-	hubBuffer[hubLen++] = 170;
-	hubBuffer[hubLen++] = packetID;
-	hubBuffer[hubLen++] = hubJoys[0];
-	hubBuffer[hubLen++] = hubJoys[1];
-	hubBuffer[hubLen++] = hubJoys[2];
-	hubBuffer[hubLen++] = hubJoys[3];
-	hubBuffer[hubLen++] = hubMouse[0];
-	hubBuffer[hubLen++] = hubMouse[1];
-	hubBuffer[hubLen++] = hubLen;
+	outLen = 0;
+	outBuffer[outLen++] = 170;
+	outBuffer[outLen++] = packetID;
+	outBuffer[outLen++] = hubJoys[0];
+	outBuffer[outLen++] = hubJoys[1];
+	outBuffer[outLen++] = hubJoys[2];
+	outBuffer[outLen++] = hubJoys[3];
+	outBuffer[outLen++] = hubMouse[0];
+	outBuffer[outLen++] = hubMouse[1];
+	outBuffer[outLen++] = hubLen;
 	for (i=0; i<hubLen; i++)
-		hubBuffer[hubLen++] = hubBuffer[i];
-	hubBuffer[hubLen++] = checksum;
+		outBuffer[outLen++] = hubBuffer[i];
+	outBuffer[outLen++] = checksum;
 
 	// Timeout packets
 	HubTimeoutPacket();
