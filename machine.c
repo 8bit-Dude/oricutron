@@ -977,6 +977,9 @@ void preinit_machine( struct machine *oric )
   oric->prf = NULL;
   oric->prclock = 0;
   oric->prclose = 0;
+  oric->hubclock = 0;
+  oric->hubcur = 0;
+  oric->hublen = 0;
   oric->lasttapefile[0] = 0;
   oric->keymap = KMAP_QWERTY;
   oric->statusbar_mode = STATUSBARMODE_FULL;

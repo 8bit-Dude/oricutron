@@ -24,7 +24,8 @@ enum
 {
   JOYIFACE_NONE = 0,
   JOYIFACE_ALTAI,
-  JOYIFACE_IJK
+  JOYIFACE_IJK,
+  JOYIFACE_HUB
 };
 
 // Joystick emulation modes

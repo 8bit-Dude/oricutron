@@ -62,7 +62,7 @@ void lprintchar( struct machine *oric, char c )
           return;
         }
 
-        do_popup( oric, "Printing to 'printer_out.txt'" );
+        //do_popup( oric, "Printing to 'printer_out.txt'" );
       }
 
       // Put the char to the file, set up the timers
@@ -398,11 +398,12 @@ void via_init( struct via *v, struct machine *oric, int viatype )
       v->cb2shifted = via_main_cb2pulsed;  // Does the same (for now)
       v->orbchange  = tape_orbchange;
       v->irqbit     = IRQF_VIA;
-      v->read_port_a  = via_read_porta;
-      v->read_port_b  = via_read_portb;
+      v->read_port_a = via_read_porta;
+      v->read_port_b = via_read_portb;
       v->write_port_a = via_main_write_porta;
       v->write_port_b = via_write_portb;
-      break;
+	  v->write_CA1 = via_write_CA1;
+	  break;
 
     case VIA_TELESTRAT:
       v->w_iorb     = via_tele_w_iorb;
@@ -439,16 +440,42 @@ void via_clock( struct via *v, unsigned int cycles )
 
   if( !cycles ) return;
 
-  // Simulate the feedback from the printer
+  // Simulate feedback from the printer
   if( v->oric->prclock > 0 )
   {
     v->oric->prclock -= cycles;
     if( v->oric->prclock <= 0 )
     {
       v->oric->prclock = 0;
-      if( v->oric->printenable )
-        via_write_CA1( v, 0 );
+	  if (v->oric->printenable) {
+		  via_write_CA1( v, 0 );
+	  }
     }
+  }
+
+  // Simulate feedback from 8bit-hub
+  if (v->oric->hubclock > 0)
+  {
+	  // Update clock
+	  v->oric->hubclock -= cycles;
+
+	  // Keep data loaded and toggle CA1
+	  via_main_write_porta(v, 0xff, v->oric->hubdata[v->oric->hubcur]);
+	  if (v->oric->hubclock <= 90) {
+		  via_write_CA1(v, 1);
+	  } else {
+		  via_write_CA1(v, 0);
+	  }
+
+	  // Move to next byte
+	  if (v->oric->hubclock <= 0) {
+		  v->oric->hubcur++;
+		  if (v->oric->hubcur < v->oric->hublen) {
+			  v->oric->hubclock = 180;
+		  } else {
+			  v->oric->hubclock = 0;
+		  }
+	  }
   }
 
   // This is just a timer to close the
@@ -690,7 +717,7 @@ void via_write( struct via *v, int offset, unsigned char data )
       break;
     case VIA_IORA:
       v->ora = data;
-      via_clr_irq( v, VIRQF_CA1 );
+      //via_clr_irq( v, VIRQF_CA1 );
       switch( v->pcr & PCRF_CA2CON )
       {
         case 0x00:
@@ -906,7 +933,7 @@ unsigned char via_read( struct via *v, int offset )
       if( v->r_iorb ) v->r_iorb( v );
       return (v->orb&v->ddrb)|(v->irbl&(~v->ddrb));
     case VIA_IORA:
-      via_clr_irq( v, VIRQF_CA1 );
+      //via_clr_irq( v, VIRQF_CA1 );
       switch( v->pcr & PCRF_CA2CON )
       {
         case 0x00:

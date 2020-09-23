@@ -155,6 +155,8 @@ struct machine
 
   FILE *prf;
   int prclose, prclock;
+  int hubsend, hubclock;
+  unsigned char hubcur, hublen, *hubdata;
 
   unsigned char tapebit, tapeout, tapeparity;
   int tapelen, tapeoffs, tapecount, tapetime, tapedupbytes, tapehdrend, tapedelay;

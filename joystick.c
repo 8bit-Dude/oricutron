@@ -34,6 +34,7 @@
 #include "6551.h"
 #include "machine.h"
 #include "joystick.h"
+#include "hub.h"
 
 struct keyjoydef
 {
@@ -251,6 +252,8 @@ static SDL_bool dojoyevent( SDL_Event *ev, struct machine *oric, Sint16 mode, Ui
   return swallowit;
 }
 
+unsigned char* HubTxCallback(unsigned char data, unsigned char* joy1, unsigned char* joy2, unsigned char* out);
+
 void joy_buildmask( struct machine *oric )
 {
   Uint8 mkmask = 0xff;
@@ -302,8 +305,20 @@ void joy_buildmask( struct machine *oric )
 
   else
   {
+	unsigned char len, *data;
     switch( oric->joy_iface )
     {
+	  case JOYIFACE_HUB:
+		data = HubTxCallback(joysel, joystate_a, joystate_b, &len);
+		if (data != NULL) {
+			oric->hubdata = data;
+			oric->hublen = len;
+			oric->hubcur = 0;
+			oric->hubclock = 280;
+			return;
+		}
+		break;
+
       case JOYIFACE_ALTAI:
         if( joysel & 0x80 )
         {

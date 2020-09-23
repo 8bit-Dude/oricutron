@@ -149,6 +149,7 @@ static char *disktypes[] = { "none",
 static char *joyifacetypes[] = { "none",
                                  "altai|pase",
                                  "ijk",
+                                 "hub",
                                  NULL };
 
 static char *joymodes[] = { "none",

@@ -75,6 +75,7 @@ struct via
   unsigned char (*read_port_b)(struct via *);
   void (*write_port_a)(struct via *v, unsigned char, unsigned char);
   void (*write_port_b)(struct via *v, unsigned char, unsigned char);
+  void (*write_CA1)(struct via *v, unsigned char data);
 
   struct machine *oric;
   int irqbit;
