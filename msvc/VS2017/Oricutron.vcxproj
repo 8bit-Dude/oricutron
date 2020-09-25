@@ -73,11 +73,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>C:\Dropbox (Personal)\8bit\8bit-Unity\utils\emulators\Oricutron-1.3</OutDir>
+    <OutDir>C:\Dropbox (Personal)\8bit\8bit-Unity\utils\emulators\Oricutron-1.2-Hub</OutDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>C:\Dropbox (Personal)\8bit\8bit-Unity\utils\emulators\Oricutron-1.2-Hub</OutDir>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>C:\Dropbox (Personal)\8bit\8bit-Unity\utils\emulators\Oricutron-1.3</OutDir>
+    <OutDir>C:\Dropbox (Personal)\8bit\8bit-Unity\utils\emulators\Oricutron-1.2-Hub</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>C:\Dropbox (Personal)\8bit\8bit-Unity\utils\emulators\Oricutron-1.2-Hub</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <PreBuildEvent>
@@ -115,7 +120,7 @@ if "$(Configuration.Contains('Release'))"=="True" ( if "$(Platform)"=="x64" ( co
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\vcpkg\installed\x64-windows\include\SDL2\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SDL_MAIN_HANDLED=1;__OPENGL_AVAILABLE__;_MBCS;WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;__CBCOPY__;__CBPASTE__;APP_NAME_FULL="Oricutron 1.3.0a";APP_YEAR="2020";VERSION_COPYRIGHTS="Oricutron 1.3.0a (c)2015 Peter Gordon (pete@petergordon.org.uk)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SDL_MAIN_HANDLED=1;__OPENGL_AVAILABLE__;_MBCS;WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;__CBCOPY__;__CBPASTE__;APP_NAME_FULL="Oricutron 1.2.0-Hub";APP_YEAR="2020";VERSION_COPYRIGHTS="Oricutron 1.2.0-Hub (c)2015 Peter Gordon (pete@petergordon.org.uk)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/we4013 /we4115 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -135,7 +140,7 @@ if "$(Configuration.Contains('Release'))"=="True" ( if "$(Platform)"=="x64" ( co
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\vcpkg\installed\x64-windows\include\SDL2\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SDL_MAIN_HANDLED=1;__OPENGL_AVAILABLE__;_MBCS;WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;__CBCOPY__;__CBPASTE__;APP_NAME_FULL="Oricutron 1.3.0a";APP_YEAR="2020";VERSION_COPYRIGHTS="Oricutron 1.3.0a (c)2015 Peter Gordon (pete@petergordon.org.uk)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SDL_MAIN_HANDLED=1;__OPENGL_AVAILABLE__;_MBCS;WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;__CBCOPY__;__CBPASTE__;APP_NAME_FULL="Oricutron 1.2.0-Hub";APP_YEAR="2020";VERSION_COPYRIGHTS="Oricutron 1.2.0-Hub (c)2015 Peter Gordon (pete@petergordon.org.uk)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/we4013 /we4115 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -157,7 +162,7 @@ if "$(Configuration.Contains('Release'))"=="True" ( if "$(Platform)"=="x64" ( co
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\vcpkg\installed\x64-windows\include\SDL2\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SDL_MAIN_HANDLED=1;__OPENGL_AVAILABLE__;_MBCS;WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;__CBCOPY__;__CBPASTE__;APP_NAME_FULL="Oricutron 1.3.0a";APP_YEAR="2020";VERSION_COPYRIGHTS="Oricutron 1.3.0a (c)2015 Peter Gordon (pete@petergordon.org.uk)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SDL_MAIN_HANDLED=1;__OPENGL_AVAILABLE__;_MBCS;WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;__CBCOPY__;__CBPASTE__;APP_NAME_FULL="Oricutron 1.2.0-Hub";APP_YEAR="2020";VERSION_COPYRIGHTS="Oricutron 1.2.0-Hub (c)2015 Peter Gordon (pete@petergordon.org.uk)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <StringPooling>true</StringPooling>
@@ -184,7 +189,7 @@ if "$(Configuration.Contains('Release'))"=="True" ( if "$(Platform)"=="x64" ( co
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\vcpkg\installed\x86-windows\include\SDL2\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SDL_MAIN_HANDLED=1;__OPENGL_AVAILABLE__;_MBCS;WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;__CBCOPY__;__CBPASTE__;APP_NAME_FULL="Oricutron 1.3.0a";APP_YEAR="2020";VERSION_COPYRIGHTS="Oricutron 1.3.0a (c)2015 Peter Gordon (pete@petergordon.org.uk)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SDL_MAIN_HANDLED=1;__OPENGL_AVAILABLE__;_MBCS;WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;__CBCOPY__;__CBPASTE__;APP_NAME_FULL="Oricutron 1.2.0-Hub";APP_YEAR="2020";VERSION_COPYRIGHTS="Oricutron 1.2.0-Hub (c)2015 Peter Gordon (pete@petergordon.org.uk)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <StringPooling>true</StringPooling>
